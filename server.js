@@ -19,6 +19,8 @@ app.use(session({
 }));
 
 app.use(require('./controllers'));
+app.use('/', homeRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
