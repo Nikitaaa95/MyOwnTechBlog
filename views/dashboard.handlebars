@@ -1,0 +1,9 @@
+<h2>Dashboard</h2>
+{{#each posts}}
+    <article>
+        <h3>{{title}}</h3>
+        <p>{{content}}</p>
+        <a href="/dashboard/edit/{{id}}">Edit</a>
+        <a href="/dashboard/delete/{{id}}">Delete</a>
+    </article>
+{{/each}}
