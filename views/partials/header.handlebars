@@ -3,13 +3,13 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            {{#if loggedIn}}
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
-            {{else}}
+            {{#unless loggedIn}}
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/auth/signup">Signup</a></li>
-            {{/if}}
+            {{else}}
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+            {{/unless}}
         </ul>
     </nav>
 </header>
