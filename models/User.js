@@ -1,8 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-const { Post } = require('./Post');
-const { Comment } = require('./Comment'); 
 
 class User extends Model {
   checkPassword(loginPw) {
@@ -21,7 +19,10 @@ User.init(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'Username already exists!',
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -49,15 +50,5 @@ User.init(
     modelName: 'user',
   }
 );
-
-User.hasMany(Post, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-});
-
-User.hasMany(Comment, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
-});
 
 module.exports = User;
