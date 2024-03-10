@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const homeRoutes = require('./controllers'); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,10 +14,11 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'your_secret_here',
   resave: false,
   saveUninitialized: false
 }));
+
 
 app.use(require('./controllers'));
 app.use('/', homeRoutes);

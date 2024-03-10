@@ -5,18 +5,15 @@ const { Post, User, Comment } = require('../models');
 router.get('/', async (req, res) => {
   try {
     // Get all posts with associated user data
-    const postData = await Post.findAll({
-      include: [{ model: User }],
+    const posts = await Post.findAll({
+      include: { model: User },
       order: [['created_at', 'DESC']],
     });
 
-    // Serialize data so the template can read it
-    const posts = postData.map((post) => post.get({ plain: true }));
-
     // Render the homepage template with the posts data
     res.render('homepage', {
-      posts,
-      loggedIn: req.session.loggedIn,
+      posts: posts.map(post => post.toJSON()), 
+      loggedIn: req.session.loggedIn || false, 
     });
   } catch (err) {
     console.error(err);
@@ -27,18 +24,18 @@ router.get('/', async (req, res) => {
 // Single post route
 router.get('/post/:id', async (req, res) => {
   try {
-    // Get the post by id with associated user and comments data
-    const postData = await Post.findByPk(req.params.id, {
+    const post = await Post.findByPk(req.params.id, {
       include: [{ model: User }, { model: Comment, include: [{ model: User }] }],
     });
 
-    // Serialize data so the template can read it
-    const post = postData.get({ plain: true });
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
 
-    // Render the single post template with the post data
+   
     res.render('single-post', {
-      post,
-      loggedIn: req.session.loggedIn,
+      post: post.toJSON(), 
+      loggedIn: req.session.loggedIn || false, 
     });
   } catch (err) {
     console.error(err);
