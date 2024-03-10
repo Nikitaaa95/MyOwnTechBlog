@@ -34,7 +34,17 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+// Export individual models instead of the entire db object
+const User = db['User'];
+const Project = db['Project'];
 
-module.exports = db;
+User.hasMany(Project, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
+
+Project.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+module.exports = { User, Project };
