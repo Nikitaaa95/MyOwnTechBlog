@@ -1,6 +1,8 @@
 const User = db['User'];
 const Project = db['Project'];
 const Comment = db['Comment'];
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 User.hasMany(Project, {
   foreignKey: 'user_id',
