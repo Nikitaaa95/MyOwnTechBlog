@@ -1,6 +1,6 @@
-const User = db['User'];
-const Project = db['Project'];
-const Comment = db['Comment'];
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
@@ -9,7 +9,7 @@ User.hasMany(Project, {
   onDelete: 'CASCADE'
 });
 
-Project.belongsTo(User, {
+Post.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
@@ -23,4 +23,4 @@ Comment.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, Project, Comment };
+module.exports = { User, Post, Comment };
