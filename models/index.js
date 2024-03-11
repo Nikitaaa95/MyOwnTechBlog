@@ -4,7 +4,7 @@ const Comment = require('./Comment');
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-User.hasMany(Project, {
+User.hasMany(Post, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
