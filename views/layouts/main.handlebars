@@ -6,22 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechBlog</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: beige;
+            color: black;
+        }
+
+        header {
+            background-color: black;
+            color: beige;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: beige;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .content {
+            background-color: beige;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: black;
+            color: beige;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
     <header>
+        <h1>My Own Tech Blog</h1>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/layout">Layout</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        {{{body}}}
-    </main>
+    <div class="container">
+        {{insert}}
+    </div>
+    <footer>
+        &copy; 2022 Black and Beige Template. All rights reserved.
+    </footer>
 </body>
 
 </html>

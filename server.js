@@ -12,6 +12,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configure session
 const sess = {
   secret: 'Super secret secret',
   cookie: {
@@ -27,20 +28,27 @@ const sess = {
   }),
 };
 
+// Configure handlebars
 const hbs = exphbs.create({
-  extname: '.handlebars', // Specify the file extension
-  defaultLayout: 'main',   // Specify the default layout file (main.handlebars)
-  layoutsDir: path.join(__dirname, 'views/layouts') // Specify the layouts directory
+  extname: '.handlebars', 
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views/layouts')
 });
 
+// Set handlebars as the view engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
+
+// Routes
 app.use(routes);
 
+// Sync Sequelize models and start server
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 });
