@@ -27,7 +27,12 @@ const sess = {
   }),
 };
 
-const hbs = exphbs.create({});
+const hbs = exphbs.create({
+  extname: '.handlebars', // Specify the file extension
+  defaultLayout: 'main',   // Specify the default layout file (main.handlebars)
+  layoutsDir: path.join(__dirname, 'views/layouts') // Specify the layouts directory
+});
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(express.json());

@@ -5,3 +5,45 @@
         <p>{{content}}</p>
     </article>
 {{/each}}
+
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Culinary Canvas</title>
+    <link
+      rel='stylesheet'
+      href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
+    />
+  </head>
+
+  <body>
+    <div class='flex-column justify-space-around mt-6'>
+      <header class='title flex items-center justify-end'>
+        <h1 class='text-3xl font-bold mt-4'><a href='/profile'>Culinary Canvas</a></h1>
+        <nav>
+          {{#if logged_in}}
+            <button
+              id='logout'
+              class='ml-6 mr-4 mt-4 px-3 py-1 bg-blue-500 text-white rounded-r-md"'
+            >logout</button>
+          {{else}}
+            <a href='/'></a>
+          {{/if}}
+        </nav>
+      </header>
+      <main class='container container-fluid mt-5'>
+        {{{body}}}
+      </main>
+      <footer>
+
+      </footer>
+    </div>
+
+    {{#if logged_in}}
+      <script src='/js/logout.js'></script>
+    {{/if}}
+  </body>
+
+</html>

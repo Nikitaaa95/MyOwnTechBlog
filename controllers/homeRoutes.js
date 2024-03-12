@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models');
+const { Post, User } = require('../models');
 
 // Homepage route
 router.get('/', async (req, res) => {
@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 
     // Render the homepage template with the posts data
     res.render('homepage', {
-      posts: posts.map(post => post.toJSON()), 
-      loggedIn: req.session.loggedIn || false, 
+      posts: posts.map((post) => post.toJSON()),
+      loggedIn: req.session.loggedIn || false,
     });
   } catch (err) {
     console.error(err);
@@ -25,17 +25,16 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     const post = await Post.findByPk(req.params.id, {
-      include: [{ model: User }, { model: Comment, include: [{ model: User }] }],
+      include: [{ model: User }],
     });
 
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
 
-   
     res.render('single-post', {
-      post: post.toJSON(), 
-      loggedIn: req.session.loggedIn || false, 
+      post: post.toJSON(),
+      loggedIn: req.session.loggedIn || false,
     });
   } catch (err) {
     console.error(err);
